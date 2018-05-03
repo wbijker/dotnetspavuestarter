@@ -15,11 +15,32 @@ module.exports = (env) => {
         },
         entry: {
             vendor: [
-                'vue'
+                'babel-polyfill',
+                'vue',
+                'axios',
+                // 'vue-material',
+                './ClientApp/vendor.js',
+                
+                // CSS
+                './ClientApp/css/vendor.css',
+                'vue-material/dist/vue-material.min.css',
+                'vue-material/dist/theme/default.css',
+                'purecss/build/pure-min.css',
+                'purecss/build/grids-responsive-min.css'
             ],
         },
         module: {
-            rules: [{
+            rules: [
+                {
+                    test: /\.js$/,
+                    use: [{
+                        loader: 'babel-loader',
+                        options: {
+                            presets: ['es2015']
+                        }
+                    }]
+                },
+                {
                     test: /\.css(\?|$)/,
                     use: extractCSS.extract({
                         use: isDevBuild ? 'css-loader' : 'css-loader?minimize'
@@ -39,10 +60,6 @@ module.exports = (env) => {
         },
         plugins: [
             extractCSS,
-            new webpack.ProvidePlugin({
-                $: 'jquery',
-                jQuery: 'jquery'
-            }), // Maps these identifiers to the jQuery package (because Bootstrap expects it to be a global variable)
             new webpack.DefinePlugin({
                 'process.env.NODE_ENV': isDevBuild ? '"development"' : '"production"'
             }),
