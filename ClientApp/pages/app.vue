@@ -1,6 +1,6 @@
 <template lang="pug">
 div
-    span.orange Itecho boilterplate fir DotnetCore + Vue
+    span.orange Itecho boilterplate for DotnetCore + Vue
 </template>
 <script>
 export default {
