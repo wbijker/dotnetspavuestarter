@@ -30,6 +30,11 @@ module.exports = (env) => {
                     }
                 },
                 {
+                    test: /\.js$/,
+                    include: '/ClientApp/',
+                    loader: 'babel-loader'
+                },
+                {
                     test: /\.s[a|c]ss$/,
                     use: ExtractTextPlugin.extract({
                         fallback: "style-loader",
